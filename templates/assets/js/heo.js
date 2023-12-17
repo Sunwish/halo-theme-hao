@@ -528,7 +528,10 @@ var heo = {
 
         // 将两个值组合成一个字符串
         const name = `${randomAdjective}${randomName}`;
+        const visitorMail = '匿（不填邮箱无法收到回复提醒噢）';
 
+        // 定位ShadowRoot
+        const shadowRoot = document.querySelector("[id^='comment-content-halo-']").querySelector("div").shadowRoot;
         function dr_js_autofill_commentinfos() {
             var lauthor = [
                     "#author",
@@ -539,6 +542,7 @@ var heo = {
                     "#name",
                     "input[name='nick']",
                     "#comment_author",
+					"input[placeholder='昵称']",
                 ],
                 lmail = [
                     "#mail",
@@ -549,6 +553,7 @@ var heo = {
                     "#ds-dialog-email",
                     "input[name='mail']",
                     "#comment_email",
+					"input[placeholder='电子邮件']",
                 ],
                 lurl = [
                     "#url",
@@ -560,9 +565,10 @@ var heo = {
                     "#website",
                     "input[name='link']",
                     "#comment_url",
+					"input[placeholder='网站']",
                 ];
             for (var i = 0; i < lauthor.length; i++) {
-                var author = document.querySelector(lauthor[i]);
+                var author = shadowRoot.querySelector(lauthor[i]);
                 if (author != null) {
                     author.value = name;
                     author.dispatchEvent(new Event("input"));
@@ -571,7 +577,7 @@ var heo = {
                 }
             }
             for (var j = 0; j < lmail.length; j++) {
-                var mail = document.querySelector(lmail[j]);
+                var mail = shadowRoot.querySelector(lmail[j]);
                 if (mail != null) {
                     mail.value = visitorMail;
                     mail.dispatchEvent(new Event("input"));
@@ -582,7 +588,7 @@ var heo = {
             return !1;
         }
         dr_js_autofill_commentinfos();
-        var input = document.getElementsByClassName(GLOBAL_CONFIG.source.comments.textarea)[0];
+        var input = shadowRoot.querySelector("." + GLOBAL_CONFIG.source.comments.textarea);
         input.focus();
         input.setSelectionRange(-1, -1);
     },

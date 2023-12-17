@@ -250,7 +250,7 @@ function rightMenuCommentText(txt) {
     if (GLOBAL_CONFIG.rightMenuEnable) {
         rm.hideRightMenu();
     }
-    var input =  document.getElementsByClassName(GLOBAL_CONFIG.source.comments.textarea)[0];
+    var input =  document.querySelector("[id^='comment-content-halo-']").querySelector("div").shadowRoot.querySelector("." + GLOBAL_CONFIG.source.comments.textarea);
     let evt = document.createEvent('HTMLEvents');
     evt.initEvent('input', true, true);
     let inputValue = replaceAll(txt, '\n', '\n> ')
